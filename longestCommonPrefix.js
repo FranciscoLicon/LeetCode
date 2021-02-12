@@ -6,22 +6,22 @@ const longestCommonPrefix = (strs) => {
     if(strs.length === 0){
         return "";
     }
-    let longestWord = strs.sort((a,b) =>{
+    let minWord = strs.sort((a,b) =>{
         return b.length - a.length;
-    })[0];
+    })[strs.length-1];
     const filtered = strs.filter((value,index,arr)=>{
-        return value != longestWord;
+        return value != minWord;
     })
     let isPrefix = false;
-    while(longestWord != ""){
-        isPrefix = filtered.every(str => str.startsWith(longestWord))
+    while(minWord != ""){
+        isPrefix = filtered.every(str => str.startsWith(minWord))
         if(isPrefix){
-            return longestWord;
+            return minWord;
         } else {
-            longestWord = longestWord.slice(0,-1);
+            minWord = minWord.slice(0,-1);
         }
    }
-   return longestWord;
+   return minWord;
 };
 
 console.log(longestCommonPrefix(["a","aa","aaa","aaaa","aa"])); //a
